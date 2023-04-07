@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body style="background-color: rgb(180, 171, 171)">
+    <center>
+      <div>
+        <div id="denuevo" style="display: none;">
+          Solo se puede participar una vez en esta tarea, y el video no puede verse de nuevo.
+           Si desea participar de otro de nuestros experimentos o tiene consultas,
+          puede dirigirse a la pagina del Laboratorio de sueño y memoria, haciendo click en el siguiente
+          enlace:
+          <br>
+          <br>
+          <a href="https://zaap.bio/labsuenoymemoria"> Pagina del laboratorio</a>
+
+        </div>
+        <div id="instrucciones">
+         <br>
+         <br>
+         <br>
+         <br>
+          Por favor, antes de ver el video compruebe que su audio funciona correctamente presionando el siguiente boton. 
+          <br> Deberia escuchar el sonido de una campana durante 10 segundos.
+          <br>
+          <br>
+          <br>
+          <br> 
+          <button onclick="playAud()" type="button" id="botonaudio" style="display: block;">Probar sonido</button>
+          <br>
+          <br>
+          <br>
+          <br>
+
+          Si el audio funcionó correctamente, presione el boton de abajo para pasar al video
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <button onclick="presentarvideo()" type="button" id="botonseguir" style="display: block;">Pasar al video</button>
+
+
+        </div>
+
+        <audio id="audio">
+          <source  src="prueba.mp3" type="audio/mpeg"  >
+          Tu navegador no soporta la reproducción de audio.
+        </audio>
+        <script>
+          var aud = document.getElementById("audio");
+          function playAud() { 
+            aud.play() }
+
+
+        </script>
+  </div>
+  </center>
+    <center>
+      <div id="dada" style="display: none;">
+      <br>
+      <br>
+      <br>
+      <br>
+      <div>
+      Para continuar con el experimento, deberá completar un cuestionario haciendo clic en este enlace:
+      </div>
+      <br>
+      <br>
+      <br>
+      <div id="a">
+        <a href="https://forms.gle/py9q4uLXZJXeAavd8">Haga click aqui para acceder al cuestionario</a>
+
+      </div>
+    
+    </div>
+      
+      <video id="myVideo" width="70%" height="70%" style="display: none;">
+        <source src="video.mp4" type="video/mp4" />
+
+        Your browser does not support HTML5 video.
+      </video>
+    </center>
+    <script>
+       if (localStorage.getItem("visita")) {
+        document.getElementById("instrucciones").style.display = "none";
+        document.getElementById("denuevo").style.display = "block";
+        
+      }
+
+      var vid = document.getElementById("myVideo");
+      function presentarvideo () {
+
+      if (localStorage.getItem("visita")) {
+        alert("Este video solo puede verse una vez");
+        
+      } else {
+        document.getElementById("instrucciones").style.display = "none";
+        document.getElementById("myVideo").style.display = "block";
+        document.getElementById("boton").style.display = "block";
+        document.addEventListener("contextmenu", (event) =>
+          event.preventDefault()
+        );
+       
+        
+      } }
+
+
+        
+
+
+
+        
+       
+
+        function playVid() {
+
+            vid.play();
+
+            localStorage.setItem("visita", "realizada");
+            document.getElementById("boton").style.display = "none";
+
+            document.getElementById("myVideo").addEventListener("ended", myHandler, false);}
+          
+
+function myHandler(e) {
+  document.getElementById('myVideo').style.display = 'none';
+  document.getElementById('dada').style.display = 'block';
+ 
+}
+
+            /*   setTimeout(function () {
+            location.replace("https://forms.gle/py9q4uLXZJXeAavd8");
+            window.clearTimeout(tID); // clear time out.
+          }, 86000); */
+          
+        
+      
+    </script>
+    <center>
+      <button onclick="playVid()" type="button" id="boton" style="display: none;">Reproducir</button>
+      
+    </center>
+    <script>
+      if (localStorage.getItem("visita")) {
+        document.getElementById("boton").style.display = "none";
+      }
+    </script>
+
+  <style>
+a {
+  
+  border: 3px solid green;
+  float: center;
+}
+instrucciones {
+  
+  border: 3px solid green;
+  float: center;
+}
+
+#denuevo {
+  margin: auto;
+  width: 50%;
+  background-color: white;
+  border: 3px solid rgb(128, 0, 11);
+  padding: 100px;
+}
+  </style>
+  </body>
+</html>
